@@ -73,6 +73,11 @@ function HeaderComponent() {
             <Link>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
+            {currentUser.isAdmin && (
+              <Link to="/admin-panel?tab=add-book">
+                <Dropdown.Item>Admin</Dropdown.Item>
+              </Link>
+            )}
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
           </Dropdown>

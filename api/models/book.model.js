@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema(
   {
-    bookImage: {
+    image: {
       type: String,
       default:
         "https://library.pip-semarang.ac.id/assets/images/default-ebook.png",
@@ -15,7 +15,7 @@ const bookSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    category: {
+    categories: {
       type: Array,
       required: true,
     },

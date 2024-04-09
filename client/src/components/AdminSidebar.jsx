@@ -25,6 +25,7 @@ function AdminSidebar() {
               icon={MdAddCircle}
               labelColor="dark"
               className="cursor-pointer"
+              as="div"
             >
               Add Book
             </Sidebar.Item>
@@ -34,6 +35,7 @@ function AdminSidebar() {
               active={tab === "products"}
               icon={HiShoppingBag}
               className="cursor-pointer"
+              as="div"
             >
               Products
             </Sidebar.Item>

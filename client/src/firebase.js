@@ -10,9 +10,8 @@ const firebaseConfig = {
   projectId: "booksell-4a4c8",
   storageBucket: "booksell-4a4c8.appspot.com",
   messagingSenderId: "882801390286",
-  appId: "1:882801390286:web:689ad7b08a5fe1d685169f"
+  appId: "1:882801390286:web:689ad7b08a5fe1d685169f",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-module.exports = app
+export const app = initializeApp(firebaseConfig);

@@ -28,4 +28,14 @@ const addBook = async (req, res, next) => {
   }
 };
 
-module.exports = { addBook };
+const getBooks = async (req, res, next) => {
+  try {
+    const books = await Book.find();
+
+    res.status(200).json(books);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { addBook, getBooks };

@@ -9,6 +9,7 @@ import {
 } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useNavigate } from "react-router-dom";
 
 function AddBook() {
   const [formData, setFormData] = useState({});
@@ -16,6 +17,7 @@ function AddBook() {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -96,6 +98,8 @@ function AddBook() {
 
       if (data.success === false) {
         setError(data.message);
+      } else {
+        navigate("/admin-panel?tab=products");
       }
     } catch (error) {
       setError(error.message);

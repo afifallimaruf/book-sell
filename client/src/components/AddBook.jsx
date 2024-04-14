@@ -151,6 +151,17 @@ function AddBook() {
         </div>
         <div>
           <div className="mb-2 block">
+            <Label value="Stock" />
+          </div>
+          <TextInput
+            type="text"
+            name="stock"
+            id="stock"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
             <Label value="Image" />
           </div>
           <div className="flex gap-4 items-center justify-between">

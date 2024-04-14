@@ -2,7 +2,7 @@ const Book = require("../models/book.model");
 const errorHandler = require("../utils/error");
 
 const addBook = async (req, res, next) => {
-  const { title, author, categories, price, image } = req.body;
+  const { title, author, categories, price, stock, image } = req.body;
 
   if (!title || !author || !categories || !price || !image) {
     return next(errorHandler(400, "All fields are required"));
@@ -18,6 +18,7 @@ const addBook = async (req, res, next) => {
       author,
       categories,
       price,
+      stock,
       image,
     });
 

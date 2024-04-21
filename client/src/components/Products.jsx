@@ -44,6 +44,7 @@ function Products() {
               <Table.HeadCell>Author</Table.HeadCell>
               <Table.HeadCell>Categories</Table.HeadCell>
               <Table.HeadCell>Price</Table.HeadCell>
+              <Table.HeadCell>Stock</Table.HeadCell>
               <Table.HeadCell>
                 <span>Edit</span>/<span>Delete</span>
               </Table.HeadCell>
@@ -67,10 +68,11 @@ function Products() {
                       <Table.Cell>{book.author}</Table.Cell>
                       <Table.Cell>{book.categories}</Table.Cell>
                       <Table.Cell>{book.price}</Table.Cell>
+                      <Table.Cell>{book.stock}</Table.Cell>
                       <Table.Cell>
                         <div className="flex gap-3">
                           <div className="bg-green-400 text-white p-1 rounded-md">
-                            <Link>Edit</Link>
+                            <Link to={`/update/${book._id}`}>Edit</Link>
                           </div>
                           <div className="bg-red-400 text-white p-1 rounded-md">
                             <span

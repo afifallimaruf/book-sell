@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Admin from "./pages/Admin";
 import OnlyAdmin from "./components/OnlyAdmin";
 import FooterComponent from "./components/FooterComponent";
+import UpdateProduct from "./pages/UpdateProduct";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<OnlyAdmin />}>
             <Route path="/admin-panel" element={<Admin />} />
+            <Route path="/update/:bookId" element={<UpdateProduct />} />
           </Route>
           <Route path="/register" element={<Register />} />
         </Routes>

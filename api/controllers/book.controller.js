@@ -31,7 +31,7 @@ const addBook = async (req, res, next) => {
 
 const getBooks = async (req, res, next) => {
   const startIndex = parseInt(req.query.startIndex) || 0;
-  const limit = parseInt(req.query.limit) || 9;
+  const limit = parseInt(req.query.limit) || 5;
   try {
     const books = await Book.find().skip(startIndex).limit(limit);
 

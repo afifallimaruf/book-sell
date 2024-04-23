@@ -96,7 +96,7 @@ function Products() {
     <div className="table-auto overflow-x-scroll mt-4 ml-8 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 ">
       {currentUser.isAdmin && books.length > 0 ? (
         <>
-          <Table hoverable className="shadow-md" stripped="true">
+          <Table hoverable className="shadow-md text-center" stripped="true">
             <Table.Head>
               <Table.HeadCell>Date Created</Table.HeadCell>
               <Table.HeadCell>Image</Table.HeadCell>
@@ -119,7 +119,7 @@ function Products() {
                     <img
                       src={book.image}
                       alt=""
-                      className="w-30 h-40 object-cover"
+                      className="w-40 h-30 object-cover"
                     />
                   </Table.Cell>
                   <Table.Cell>{book.title}</Table.Cell>

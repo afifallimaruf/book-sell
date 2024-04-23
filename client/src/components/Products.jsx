@@ -9,6 +9,7 @@ function Products() {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [showLess, setShowLess] = useState(false);
+  const [bookIdToDelete, setBookIdToDelete] = useState("");
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -27,6 +28,9 @@ function Products() {
           console.log(data.message);
         } else {
           setBooks(data);
+          if (data.length < 5) {
+            setShowMore(false);
+          }
         }
       };
       fetchBooks();
@@ -46,12 +50,12 @@ function Products() {
       const data = await res.json();
 
       if (res.ok) {
-        setBooks((prev) => [...prev, data[0]]);
-        setShowLess(true);
-        setShowMore(false);
         if (data.length < 5) {
           setShowMore(false);
         }
+        setBooks((prev) => [...prev, data[0]]);
+        setShowLess(true);
+        setShowMore(false);
       }
     } catch (error) {
       console.log(error);
@@ -62,6 +66,30 @@ function Products() {
     setBooks(() => books.slice(0, books.length - 1));
     setShowLess(false);
     setShowMore(true);
+  };
+
+  const handleDelete = async () => {
+    setShowModal(false);
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/book/delete/${bookIdToDelete}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        setBooks((prev) => prev.filter((book) => book._id !== bookIdToDelete));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -108,6 +136,7 @@ function Products() {
                         <span
                           onClick={() => {
                             setShowModal(true);
+                            setBookIdToDelete(book._id);
                           }}
                           className="cursor-pointer"
                         >
@@ -154,7 +183,9 @@ function Products() {
               Are you sure want to delete this book?
             </h3>
             <div className="flex justify-center gap-4">
-              <Button color="failure">Yes, I'm sure</Button>
+              <Button color="failure" onClick={handleDelete}>
+                Yes, I'm sure
+              </Button>
               <Button color="gray" onClick={() => setShowModal(false)}>
                 No, cancel
               </Button>

@@ -10,7 +10,6 @@ import {
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 function UpdateProduct() {
   const [formData, setFormData] = useState({});
@@ -20,7 +19,6 @@ function UpdateProduct() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { bookId } = useParams();
-  const { currentUser } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -91,9 +89,9 @@ function UpdateProduct() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/book/update/${formData._id}/${currentUser._id}`,
+        `http://localhost:8080/api/book/update/${formData._id}`,
         {
-          method: "POST",
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
           body: JSON.stringify(formData),

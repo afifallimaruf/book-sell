@@ -55,7 +55,7 @@ const getBookById = async (req, res, next) => {
 const updateBook = async (req, res, next) => {
   const { title, author, categories, price, stock, image } = req.body;
 
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  if (!req.user.isAdmin) {
     return next(
       errorHandler(403, "You are not allowed to update this product")
     );
@@ -83,4 +83,21 @@ const updateBook = async (req, res, next) => {
   }
 };
 
-module.exports = { addBook, getBooks, getBookById, updateBook };
+const deleteBook = async (req, res, next) => {
+  const bookId = req.params.bookId;
+
+  if (!req.user.isAdmin) {
+    return next(
+      errorHandler(403, "You are not allowed to delete this product")
+    );
+  }
+
+  try {
+    await Book.findByIdAndDelete(bookId);
+    res.status(200).json("This product has been deleted");
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { addBook, getBooks, getBookById, updateBook, deleteBook };

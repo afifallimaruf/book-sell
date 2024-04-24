@@ -60,7 +60,7 @@ function Hero() {
               <p className="bg-clip-text text-transparent bg-primary">
                 by {bookMainImg.author}
               </p>
-              <p className="bg">Rp.{bookMainImg.price}</p>
+              <p className="text-red-500">Rp.{bookMainImg.price}</p>
               <div className="">
                 <Button
                   gradientMonochrome="info"

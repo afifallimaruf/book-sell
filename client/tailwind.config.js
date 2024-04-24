@@ -5,10 +5,19 @@ module.exports = {
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#1182c5",
+        secondary: "#2aa6df",
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          sm: "3rem",
+        },
+      },
+    },
   },
-  plugins: [
-	require("flowbite/plugin"),
-	require('tailwind-scrollbar'),
-	],
+  plugins: [require("flowbite/plugin"), require("tailwind-scrollbar")],
 };

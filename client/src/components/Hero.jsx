@@ -75,6 +75,8 @@ function Hero() {
               {/* Main image */}
               <div className="h-[300px] sm:h-[450px] overflow-hidden flex justify-center items-center">
                 <img
+                  data-aos="zoom-in"
+                  data-aos-once="true"
                   src={bookMainImg.image}
                   alt=""
                   className="w-[300px] h-[300px] sm:[h-450px] sm:w-[450px] sm:scale-125 object-contain mx-auto"

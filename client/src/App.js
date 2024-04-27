@@ -1,3 +1,4 @@
+import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import HeaderComponent from "./components/HeaderComponent";
@@ -8,8 +9,21 @@ import Admin from "./pages/Admin";
 import OnlyAdmin from "./components/OnlyAdmin";
 import FooterComponent from "./components/FooterComponent";
 import UpdateProduct from "./pages/UpdateProduct";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
+
+  React.useEffect(() => {
+    AOS.init({
+      offset: 100,
+      duration: 800,
+      easing: "ease-in-sine",
+      delay: 100,
+    });
+    AOS.refresh();
+  }, []);
+  
   return (
     <div>
       <BrowserRouter>

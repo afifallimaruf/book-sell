@@ -11,6 +11,11 @@ import FooterComponent from "./components/FooterComponent";
 import UpdateProduct from "./pages/UpdateProduct";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Fiction from "./pages/Fiction";
+import NonFiction from "./components/NonFiction";
+import SciFi from "./components/SciFi";
+import SelfDev from "./components/SelfDev";
+import History from "./components/History";
 
 function App() {
 
@@ -36,6 +41,11 @@ function App() {
             <Route path="/update/:bookId" element={<UpdateProduct />} />
           </Route>
           <Route path="/register" element={<Register />} />
+          <Route path="/category/fiction" element={<Fiction />} />
+          <Route path="/category/non-fiction" element={<NonFiction />} />
+          <Route path="/category/sci-fi" element={<SciFi />} />
+          <Route path="/category/self-dev" element={<SelfDev />} />
+          <Route path="/category/history" element={<History />} />
         </Routes>
         <FooterComponent />
       </BrowserRouter>

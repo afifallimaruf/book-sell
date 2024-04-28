@@ -35,7 +35,9 @@ const getBooks = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 5;
     const sort = req.query.order === 'dsc' ? -1 : 1
 
-    const books = await Book.find().skip(startIndex).limit(limit).sort({createdAt: sort});
+    const books = await Book.find({
+      ...(req.query.category && {categories: req.query.category})
+    }).skip(startIndex).limit(limit).sort({createdAt: sort});
 
     res.status(200).json(books);
   } catch (error) {

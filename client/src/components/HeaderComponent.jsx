@@ -107,7 +107,7 @@ function HeaderComponent() {
           <Link to="/category/non-fiction">
           <Dropdown.Item>Non-Fiction</Dropdown.Item>
           </Link>
-          <Link to="/category/scifi">
+          <Link to="/category/sci-fi">
           <Dropdown.Item>Sci-fi</Dropdown.Item>
           </Link>
           <Link to="/category/self-dev">

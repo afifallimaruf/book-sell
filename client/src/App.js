@@ -12,10 +12,10 @@ import UpdateProduct from "./pages/UpdateProduct";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Fiction from "./pages/Fiction";
-import NonFiction from "./components/NonFiction";
-import SciFi from "./components/SciFi";
-import SelfDev from "./components/SelfDev";
-import History from "./components/History";
+import NonFiction from "./pages/NonFiction";
+import SciFi from "./pages/SciFi";
+import SelfDev from "./pages/SelfDev";
+import History from "./pages/History";
 
 function App() {
 

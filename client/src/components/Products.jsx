@@ -53,7 +53,7 @@ function Products() {
         if (data.length < 5) {
           setShowMore(false);
         }
-        setBooks((prev) => [...prev, data[0]]);
+        setBooks((prev) => [...prev, ...data]);
         setShowLess(true);
         setShowMore(false);
       }

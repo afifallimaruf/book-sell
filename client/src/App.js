@@ -12,10 +12,10 @@ import UpdateProduct from "./pages/UpdateProduct";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Fiction from "./pages/Fiction";
-import NonFiction from "./pages/NonFiction";
 import SciFi from "./pages/SciFi";
 import SelfDev from "./pages/SelfDev";
 import History from "./pages/History";
+import Tech from "./pages/Tech";
 
 function App() {
 
@@ -42,10 +42,10 @@ function App() {
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/category/fiction" element={<Fiction />} />
-          <Route path="/category/non-fiction" element={<NonFiction />} />
           <Route path="/category/sci-fi" element={<SciFi />} />
           <Route path="/category/self-dev" element={<SelfDev />} />
           <Route path="/category/history" element={<History />} />
+          <Route path="/category/tech" element={<Tech />} />
         </Routes>
         <FooterComponent />
       </BrowserRouter>

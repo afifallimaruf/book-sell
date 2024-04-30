@@ -2,7 +2,8 @@ const Book = require("../models/book.model");
 const errorHandler = require("../utils/error");
 
 const addBook = async (req, res, next) => {
-  const { title, author, categories, price, stock, image } = req.body;
+  const { title, author, categories, price, stock, image, description } =
+    req.body;
 
   if (!title || !author || !categories || !price || !image) {
     return next(errorHandler(400, "All fields are required"));
@@ -20,6 +21,7 @@ const addBook = async (req, res, next) => {
       price,
       stock,
       image,
+      description,
     });
 
     const bookSaved = await newBook.save();
@@ -32,12 +34,15 @@ const addBook = async (req, res, next) => {
 const getBooks = async (req, res, next) => {
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
-    const limit = parseInt(req.query.limit) || 5;
-    const sort = req.query.order === 'dsc' ? -1 : 1
+    const limit = parseInt(req.query.limit) || 10;
+    const sort = req.query.order === "dsc" ? -1 : 1;
 
     const books = await Book.find({
-      ...(req.query.category && {categories: req.query.category})
-    }).skip(startIndex).limit(limit).sort({createdAt: sort});
+      ...(req.query.category && { categories: req.query.category }),
+    })
+      .skip(startIndex)
+      .limit(limit)
+      .sort({ createdAt: sort });
 
     res.status(200).json(books);
   } catch (error) {
@@ -57,7 +62,8 @@ const getBookById = async (req, res, next) => {
 };
 
 const updateBook = async (req, res, next) => {
-  const { title, author, categories, price, stock, image } = req.body;
+  const { title, author, categories, price, stock, image, description } =
+    req.body;
 
   if (!req.user.isAdmin) {
     return next(
@@ -76,6 +82,7 @@ const updateBook = async (req, res, next) => {
           price,
           stock,
           image,
+          description,
         },
       },
       { new: true }

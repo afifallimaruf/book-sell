@@ -1,6 +1,6 @@
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
-import BgHero from "../assets/blue-pattern.png";
+import BgHero from "../assets/img.jpg";
 
 function Hero() {
   const [books, setBooks] = useState([]);

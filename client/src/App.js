@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import HeaderComponent from "./components/HeaderComponent";
@@ -16,9 +16,9 @@ import SciFi from "./pages/SciFi";
 import SelfDev from "./pages/SelfDev";
 import History from "./pages/History";
 import Tech from "./pages/Tech";
+import BookPage from "./pages/BookPage";
 
 function App() {
-
   React.useEffect(() => {
     AOS.init({
       offset: 100,
@@ -28,7 +28,7 @@ function App() {
     });
     AOS.refresh();
   }, []);
-  
+
   return (
     <div>
       <BrowserRouter>
@@ -46,6 +46,7 @@ function App() {
           <Route path="/category/self-dev" element={<SelfDev />} />
           <Route path="/category/history" element={<History />} />
           <Route path="/category/tech" element={<Tech />} />
+          <Route path="/book/:bookId" element={<BookPage />} />
         </Routes>
         <FooterComponent />
       </BrowserRouter>

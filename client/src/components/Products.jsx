@@ -9,6 +9,8 @@ function Products() {
   const [showModal, setShowModal] = useState(false);
   const [showMore, setShowMore] = useState(true);
   const [showLess, setShowLess] = useState(false);
+  // const [totalBook, setTotalBook] = useState(0)
+  // const [totalBookLimit, setTotalBookLimit] = useState(0)
   const [bookIdToDelete, setBookIdToDelete] = useState("");
   const { currentUser } = useSelector((state) => state.user);
 
@@ -48,14 +50,17 @@ function Products() {
       );
 
       const data = await res.json();
+      console.log(data);
 
       if (res.ok) {
+        setBooks((prev) => [...prev, ...data]);
         if (data.length < 5) {
           setShowMore(false);
         }
-        setBooks((prev) => [...prev, ...data]);
-        setShowLess(true);
-        setShowMore(false);
+
+        // setShowLess(true);
+        // setShowMore(false);
+        console.log(data.length);
       }
     } catch (error) {
       console.log(error);
@@ -103,6 +108,7 @@ function Products() {
               <Table.HeadCell>Title</Table.HeadCell>
               <Table.HeadCell>Author</Table.HeadCell>
               <Table.HeadCell>Categories</Table.HeadCell>
+              <Table.HeadCell>Description</Table.HeadCell>
               <Table.HeadCell>Price</Table.HeadCell>
               <Table.HeadCell>Stock</Table.HeadCell>
               <Table.HeadCell>
@@ -125,6 +131,7 @@ function Products() {
                   <Table.Cell>{book.title}</Table.Cell>
                   <Table.Cell>{book.author}</Table.Cell>
                   <Table.Cell>{book.categories}</Table.Cell>
+                  <Table.Cell>{book.description}</Table.Cell>
                   <Table.Cell>{book.price}</Table.Cell>
                   <Table.Cell>{book.stock}</Table.Cell>
                   <Table.Cell>

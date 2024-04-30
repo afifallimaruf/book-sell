@@ -197,6 +197,18 @@ function UpdateProduct() {
         </div>
         <div>
           <div className="mb-2 block">
+            <Label value="Description" />
+          </div>
+          <textarea
+            className="w-full"
+            name="description"
+            id="description"
+            onChange={handleChange}
+            defaultValue={formData.description}
+          ></textarea>
+        </div>
+        <div>
+          <div className="mb-2 block">
             <Label value="Image" />
           </div>
           <div className="flex gap-4 items-center justify-between">

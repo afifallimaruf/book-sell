@@ -161,6 +161,17 @@ function AddBook() {
           />
         </div>
         <div>
+          <div>
+            <div className="mb-2 block">
+              <Label value="Description" />
+            </div>
+            <textarea
+              className="w-full"
+              name="description"
+              id="description"
+              onChange={handleChange}
+            ></textarea>
+          </div>
           <div className="mb-2 block">
             <Label value="Image" />
           </div>

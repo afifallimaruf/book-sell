@@ -41,7 +41,6 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/book", bookRoutes);
 app.use("/api/user", userRoute);
-app.use("/api/cart", cartRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

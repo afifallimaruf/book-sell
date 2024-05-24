@@ -1,10 +1,13 @@
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import BgHero from "../assets/img.jpg";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/user/userSlice.js";
 
 function Hero() {
   const [books, setBooks] = useState([]);
   const [bookMainImg, setBookMainImg] = useState([]);
+  const dispatch = useDispatch();
 
   const bgImage = {
     backgroundImage: `url(${BgHero})`,
@@ -36,6 +39,33 @@ function Hero() {
     getBooksForHero();
   }, []);
 
+  const handleClick = async () => {
+    try {
+      const request = await fetch(
+        "http://localhost:8080/api/user/add-to-cart",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookId: bookMainImg._id,
+            image: bookMainImg.image,
+            title: bookMainImg.title,
+            price: bookMainImg.price,
+          }),
+        }
+      );
+      const dataBook = await request.json();
+      if (!request.ok) {
+        console.log("Error");
+      } else {
+        dispatch(addToCart(dataBook.userCart));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div
@@ -63,8 +93,8 @@ function Hero() {
               <p className="text-red-500">Rp.{bookMainImg.price}</p>
               <div className="">
                 <Button
-                  gradientMonochrome="info"
-                  className="rounded-full mt-4 hover:scale-105 duration-200"
+                  onClick={handleClick}
+                  className="bg-slate-900 rounded-full mt-4 hover:scale-105 duration-200"
                 >
                   Add to cart
                 </Button>

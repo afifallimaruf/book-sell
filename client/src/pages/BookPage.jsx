@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/user/userSlice.js";
 
 function BookPage() {
   const [book, setBook] = useState([]);
   const [category, setCategory] = useState("");
   const { bookId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +30,33 @@ function BookPage() {
     };
     fetchData();
   }, [bookId]);
+
+  const handleClick = async () => {
+    try {
+      const request = await fetch(
+        "http://localhost:8080/api/user/add-to-cart",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookId: bookId,
+            image: book.image,
+            title: book.title,
+            price: book.price,
+          }),
+        }
+      );
+      const dataBook = await request.json();
+      if (!request.ok) {
+        console.log("Error");
+      } else {
+        dispatch(addToCart(dataBook.userCart));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -55,7 +85,16 @@ function BookPage() {
               </span>
               <h1 className="text-3xl font-bold">{book.title}</h1>
             </div>
+            <p className="text-gray-700">{book.description}</p>
             <h6 className="text-2xl font-semibold">Rp.{book.price}</h6>
+            <div className="flex flex-row items-center gap-12">
+              <button
+                onClick={handleClick}
+                className="bg-slate-900 text-white font-semibold py-3 px-16 rounded-xl h-full"
+              >
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>

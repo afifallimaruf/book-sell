@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import Logo from "../assets/logo.png";
 import { useSelector, useDispatch } from "react-redux";
-import { FaShoppingCart } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
 import { logoutSuccess } from "../redux/user/userSlice";
 
 function HeaderComponent() {
@@ -13,7 +13,6 @@ function HeaderComponent() {
   const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    console.log("Logout");
     try {
       const res = await fetch("http://localhost:8080/api/user/logout", {
         credentials: "include",
@@ -31,6 +30,7 @@ function HeaderComponent() {
       console.log(error);
     }
   };
+
   return (
     <Navbar className="border-b-2">
       <Navbar.Toggle />
@@ -48,8 +48,19 @@ function HeaderComponent() {
       <Button className="w-12 h-10 lg:hidden" color="grey" pill>
         <AiOutlineSearch />
       </Button>
-      <div className="md:order-2 cursor-pointer">
-        <FaShoppingCart />
+      <div className="md:order-2 cursor-pointer relative">
+        <span>
+          <Link to="/user/cart">
+            <IoCartOutline size={20} />
+          </Link>
+        </span>
+        <div className="bg-red-600 text-white w-4 h-4 rounded-full p-1 flex items-center justify-center absolute -top-1 -right-2">
+          <p className="text-xs">
+            {currentUser && currentUser.userCart
+              ? currentUser.userCart.length
+              : 0}
+          </p>
+        </div>
       </div>
       {currentUser ? (
         <div className="md:order-2">
@@ -102,19 +113,19 @@ function HeaderComponent() {
         </Navbar.Link>
         <Dropdown label="Category" inline>
           <Link to="/category/fiction">
-          <Dropdown.Item>Fiction</Dropdown.Item>
+            <Dropdown.Item>Fiction</Dropdown.Item>
           </Link>
           <Link to="/category/sci-fi">
-          <Dropdown.Item>Sci-fi</Dropdown.Item>
+            <Dropdown.Item>Sci-fi</Dropdown.Item>
           </Link>
           <Link to="/category/self-dev">
-          <Dropdown.Item>Self Development</Dropdown.Item>
+            <Dropdown.Item>Self Development</Dropdown.Item>
           </Link>
           <Link to="/category/tech">
-          <Dropdown.Item>Technology</Dropdown.Item>
+            <Dropdown.Item>Technology</Dropdown.Item>
           </Link>
           <Link to="/category/history">
-          <Dropdown.Item>History</Dropdown.Item>
+            <Dropdown.Item>History</Dropdown.Item>
           </Link>
         </Dropdown>
       </Navbar.Collapse>

@@ -1,8 +1,38 @@
 import React from "react";
 import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/user/userSlice.js";
 
 function BookCard({ data }) {
+  const dispatch = useDispatch();
+  const handleClick = async () => {
+    try {
+      const request = await fetch(
+        "http://localhost:8080/api/user/add-to-cart",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookId: data._id,
+            image: data.image,
+            title: data.title,
+            price: data.price,
+          }),
+        }
+      );
+
+      const dataBook = await request.json();
+      if (!request.ok) {
+        console.log("Error");
+      } else {
+        dispatch(addToCart(dataBook.userCart));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="hover:scale-110 duration-200">
       <Card className="w-[300px]" data-aos="zoom-in">
@@ -25,7 +55,10 @@ function BookCard({ data }) {
           <span className="text-sm font-bold text-gray-900 ">
             Rp.{data.price}
           </span>
-          <button className="flex items-center rounded-md bg-slate-900 px-3 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+          <button
+            onClick={handleClick}
+            className="flex items-center rounded-md bg-slate-900 px-3 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+          >
             Add to cart
           </button>
         </div>

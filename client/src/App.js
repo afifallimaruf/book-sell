@@ -17,6 +17,8 @@ import SelfDev from "./pages/SelfDev";
 import History from "./pages/History";
 import Tech from "./pages/Tech";
 import BookPage from "./pages/BookPage";
+import CartPage from "./pages/CartPage";
+import Auth from "./components/Auth";
 
 function App() {
   React.useEffect(() => {
@@ -39,6 +41,9 @@ function App() {
           <Route element={<OnlyAdmin />}>
             <Route path="/admin-panel" element={<Admin />} />
             <Route path="/update/:bookId" element={<UpdateProduct />} />
+          </Route>
+          <Route element={<Auth />}>
+            <Route path="/user/cart" element={<CartPage />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/category/fiction" element={<Fiction />} />

@@ -14,8 +14,15 @@ const userSlice = createSlice({
     logoutSuccess: (state) => {
       state.currentUser = null;
     },
+    addToCart: (state, action) => {
+      state.currentUser = { ...state.currentUser, userCart: action.payload };
+    },
+    removeCart: (state, action) => {
+      state.currentUser = { ...state.currentUser, userCart: action.payload };
+    },
   },
 });
 
-export const { loginSuccess, logoutSuccess } = userSlice.actions;
+export const { loginSuccess, logoutSuccess, addToCart, removeCart } =
+  userSlice.actions;
 export default userSlice.reducer;

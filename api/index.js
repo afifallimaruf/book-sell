@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/user.route");
+const bodyParser = require("body-parser");
 
 dotenv.config();
 
@@ -31,10 +32,16 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/book", bookRoutes);
 app.use("/api/user", userRoute);
+app.use("/api/cart", cartRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

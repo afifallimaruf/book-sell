@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Table, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { removeCart } from "../redux/user/userSlice";
+import {
+  getTotal,
+  getTotalAfterDelete,
+  getDeliveryFee,
+  removeCart,
+} from "../redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
   const { currentUser } = useSelector((state) => state.user);
@@ -14,10 +20,13 @@ function CartPage() {
   const [showModal, setShowModal] = useState(false);
   const [idForDelete, setIdForDelete] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const deliveryFee = 5000;
 
   const handleDelete = async () => {
     setShowModal(false);
     setDeleteCart(true);
+    dispatch(getTotal(0));
     try {
       const res = await fetch(
         `http://localhost:8080/api/user/remove-cart?id=${idForDelete}`,
@@ -64,6 +73,14 @@ function CartPage() {
     getPrices();
     getTotal();
   }, [currentUser.userCart, prices, pricesAfterDelete]);
+
+  const handleClick = () => {
+    deleteCart
+      ? dispatch(getTotalAfterDelete(totalAfterDelete))
+      : dispatch(getTotal(total));
+    dispatch(getDeliveryFee(deliveryFee));
+    navigate("/order");
+  };
 
   return (
     <>
@@ -126,14 +143,33 @@ function CartPage() {
               </p>
               <hr />
               <div className="space-y-3 font-semibold mb-10">
-                <div className="flex justify-between pt-3 font-bold">
-                  <span>Total Amount</span>
+                <div className="flex justify-between pt-3">
+                  <span>Subtotal</span>
                   <span className="text-green-600">
                     Rp.{deleteCart ? totalAfterDelete : total}
                   </span>
                 </div>
+                <div className="flex justify-between pt-3">
+                  <span>Delivery Fee</span>
+                  <span className="text-green-600">Rp.{deliveryFee}</span>
+                </div>
+                <div className="flex justify-between pt-3 font-bold">
+                  <span>Total</span>
+                  <span className="text-green-600">
+                    Rp.
+                    {deleteCart
+                      ? totalAfterDelete + deliveryFee
+                      : total + deliveryFee}
+                  </span>
+                </div>
               </div>
-              <Button className="w-full mt-5">Checkout</Button>
+              <Button
+                onClick={handleClick}
+                className="w-full mt-5"
+                gradientMonochrome="purple"
+              >
+                Proceed To Checkout
+              </Button>
             </div>
           </div>
         </div>

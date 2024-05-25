@@ -20,9 +20,28 @@ const userSlice = createSlice({
     removeCart: (state, action) => {
       state.currentUser = { ...state.currentUser, userCart: action.payload };
     },
+    getTotal: (state, action) => {
+      state.currentUser = { ...state.currentUser, total: action.payload };
+    },
+    getTotalAfterDelete: (state, action) => {
+      state.currentUser = {
+        ...state.currentUser,
+        totalAfterDelete: action.payload,
+      };
+    },
+    getDeliveryFee: (state, action) => {
+      state.currentUser = { ...state.currentUser, deliveryFee: action.payload };
+    },
   },
 });
 
-export const { loginSuccess, logoutSuccess, addToCart, removeCart } =
-  userSlice.actions;
+export const {
+  loginSuccess,
+  logoutSuccess,
+  addToCart,
+  removeCart,
+  getTotal,
+  getTotalAfterDelete,
+  getDeliveryFee,
+} = userSlice.actions;
 export default userSlice.reducer;

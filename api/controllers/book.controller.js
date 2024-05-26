@@ -39,6 +39,12 @@ const getBooks = async (req, res, next) => {
 
     const books = await Book.find({
       ...(req.query.category && { categories: req.query.category }),
+      ...(req.query.searchTerm && {
+        $or: [
+          { title: { $regex: req.query.searchTerm, $options: "i" } },
+          { author: { $regex: req.query.searchTerm, $options: "i" } },
+        ],
+      }),
     })
       .skip(startIndex)
       .limit(limit)

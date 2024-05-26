@@ -20,6 +20,7 @@ import BookPage from "./pages/BookPage";
 import CartPage from "./pages/CartPage";
 import Auth from "./components/Auth";
 import OrderPage from "./pages/OrderPage";
+import Search from "./components/Search";
 
 function App() {
   React.useEffect(() => {
@@ -54,6 +55,7 @@ function App() {
           <Route path="/category/history" element={<History />} />
           <Route path="/category/tech" element={<Tech />} />
           <Route path="/book/:bookId" element={<BookPage />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
         <FooterComponent />
       </BrowserRouter>

@@ -21,6 +21,7 @@ import CartPage from "./pages/CartPage";
 import Auth from "./components/Auth";
 import OrderPage from "./pages/OrderPage";
 import Search from "./components/Search";
+import Profile from "./pages/Profile";
 
 function App() {
   React.useEffect(() => {
@@ -47,6 +48,7 @@ function App() {
           <Route element={<Auth />}>
             <Route path="/user/cart" element={<CartPage />} />
             <Route path="/order" element={<OrderPage />} />
+            <Route path="/user/profile" element={<Profile />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/category/fiction" element={<Fiction />} />

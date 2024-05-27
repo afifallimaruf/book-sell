@@ -123,7 +123,7 @@ function HeaderComponent() {
                   {currentUser.email}
                 </span>
               </Dropdown.Header>
-              <Link>
+              <Link to="/user/profile">
                 <Dropdown.Item>Profile</Dropdown.Item>
               </Link>
               {currentUser.isAdmin && (

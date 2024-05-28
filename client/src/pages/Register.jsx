@@ -89,7 +89,12 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <Button type="submit" gradientDuoTone="purpleToPink" disabled={loading}>
+      <Button
+        type="submit"
+        gradientDuoTone="purpleToPink"
+        disabled={loading}
+        className="w-full"
+      >
         {loading ? (
           <>
             <Spinner size="sm" />

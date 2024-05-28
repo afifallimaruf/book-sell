@@ -159,7 +159,11 @@ function HeaderComponent() {
           </>
         )}
         <Navbar.Collapse>
-          <Navbar.Link className="mt-1.5" active={path === "/"} as={"div"}>
+          <Navbar.Link
+            className={currentUser ? "" : "mt-1.5"}
+            active={path === "/"}
+            as={"div"}
+          >
             <Link to="/">Home</Link>
           </Navbar.Link>
           <Dropdown label="Category" inline>
@@ -179,22 +183,31 @@ function HeaderComponent() {
               <Dropdown.Item>History</Dropdown.Item>
             </Link>
           </Dropdown>
-          <div className="flex gap-2 md:order-2 mt-8">
-            <Link to="/login">
-              <Button
-                className="block lg:hidden"
-                gradientDuoTone="redToYellow"
-                outline
-              >
-                Login
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button className="block lg:hidden" gradientDuoTone="redToYellow">
-                Register
-              </Button>
-            </Link>
-          </div>
+          {currentUser ? (
+            <></>
+          ) : (
+            <>
+              <div className="flex gap-2 md:order-2 mt-8">
+                <Link to="/login">
+                  <Button
+                    className="block lg:hidden"
+                    gradientDuoTone="redToYellow"
+                    outline
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button
+                    className="block lg:hidden"
+                    gradientDuoTone="redToYellow"
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </div>
+            </>
+          )}
         </Navbar.Collapse>
       </Navbar>
 

@@ -8,8 +8,10 @@ function OrderPage() {
   return (
     <>
       <div className="lg:grid grid-cols-3 lg:px-16 relative mt-32">
-        <div className="col-span-2">
-          <h1 className="font-semibold text-lg ml-48">Delivery Information</h1>
+        <div className="col-span-2 p-4">
+          <h1 className="font-semibold text-lg text-center">
+            Delivery Information
+          </h1>
           <form className="max-w-md mx-auto mt-6">
             <div className="grid md:grid-cols-2 md:gap-6">
               <div className="relative z-0 w-full mb-5 group">

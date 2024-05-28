@@ -106,7 +106,7 @@ function CartPage() {
                               <img
                                 src={product.image}
                                 alt=""
-                                className="w-[40px] h-[30px] object-cover"
+                                className="lg:w-[100px] lg:h-[150px] object-cover"
                               />
                             </Table.Cell>
                             <Table.Cell>{product.title}</Table.Cell>

@@ -1,6 +1,8 @@
 import { Button } from "flowbite-react";
 import React from "react";
 import { useSelector } from "react-redux";
+import { numberToRupiah } from "../utils/numberToRupiah";
+import { numberToRupiah2 } from "../utils/numberToRupiah2";
 
 function OrderPage() {
   const { currentUser } = useSelector((state) => state.user);
@@ -85,25 +87,29 @@ function OrderPage() {
               <div className="flex justify-between pt-3">
                 <span>Subtotal</span>
                 <span className="text-green-600">
-                  Rp.
                   {currentUser && currentUser.total === 0
-                    ? currentUser.totalAfterDelete
-                    : currentUser.total}
+                    ? numberToRupiah(currentUser.totalAfterDelete)
+                    : numberToRupiah(currentUser.total)}
                 </span>
               </div>
               <div className="flex justify-between pt-3">
                 <span>Delivery Fee</span>
                 <span className="text-green-600">
-                  Rp.{currentUser && currentUser.deliveryFee}
+                  {currentUser && numberToRupiah(currentUser.deliveryFee)}
                 </span>
               </div>
               <div className="flex justify-between pt-3 font-bold">
                 <span>Total</span>
                 <span className="text-green-600">
-                  Rp.
                   {currentUser && currentUser.total === 0
-                    ? currentUser.totalAfterDelete + currentUser.deliveryFee
-                    : currentUser.total + currentUser.deliveryFee}
+                    ? numberToRupiah2(
+                        currentUser.totalAfterDelete,
+                        currentUser.deliveryFee
+                      )
+                    : numberToRupiah2(
+                        currentUser.total,
+                        currentUser.deliveryFee
+                      )}
                 </span>
               </div>
             </div>

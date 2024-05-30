@@ -9,6 +9,8 @@ import {
   removeCart,
 } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import { numberToRupiah } from "../utils/numberToRupiah";
+import { numberToRupiah2 } from "../utils/numberToRupiah2";
 
 function CartPage() {
   const { currentUser } = useSelector((state) => state.user);
@@ -111,7 +113,9 @@ function CartPage() {
                             </Table.Cell>
                             <Table.Cell>{product.title}</Table.Cell>
                             <Table.Cell>{product.quantity}</Table.Cell>
-                            <Table.Cell>Rp.{product.price}</Table.Cell>
+                            <Table.Cell>
+                              {numberToRupiah(product.price)}
+                            </Table.Cell>
                             <Table.Cell>
                               <div className="bg-red-400 text-white p-1 rounded-md">
                                 <span
@@ -146,20 +150,23 @@ function CartPage() {
                 <div className="flex justify-between pt-3">
                   <span>Subtotal</span>
                   <span className="text-green-600">
-                    Rp.{deleteCart ? totalAfterDelete : total}
+                    {deleteCart
+                      ? numberToRupiah(totalAfterDelete)
+                      : numberToRupiah(total)}
                   </span>
                 </div>
                 <div className="flex justify-between pt-3">
                   <span>Delivery Fee</span>
-                  <span className="text-green-600">Rp.{deliveryFee}</span>
+                  <span className="text-green-600">
+                    {numberToRupiah(deliveryFee)}
+                  </span>
                 </div>
                 <div className="flex justify-between pt-3 font-bold">
                   <span>Total</span>
                   <span className="text-green-600">
-                    Rp.
                     {deleteCart
-                      ? totalAfterDelete + deliveryFee
-                      : total + deliveryFee}
+                      ? numberToRupiah2(totalAfterDelete, deliveryFee)
+                      : numberToRupiah2(total, deliveryFee)}
                   </span>
                 </div>
               </div>

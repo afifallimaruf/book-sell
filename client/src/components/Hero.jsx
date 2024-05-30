@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import BgHero from "../assets/img.jpg";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/user/userSlice.js";
+import { numberToRupiah } from "../utils/numberToRupiah.js";
 
 function Hero() {
   const [books, setBooks] = useState([]);
@@ -90,7 +91,9 @@ function Hero() {
               <p className="bg-clip-text text-transparent bg-primary">
                 by {bookMainImg.author}
               </p>
-              <p className="text-red-500">Rp.{bookMainImg.price}</p>
+              <p className="text-red-500">
+                {numberToRupiah(bookMainImg.price)}
+              </p>
               <div className="">
                 <Button
                   onClick={handleClick}

@@ -3,6 +3,7 @@ import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/user/userSlice.js";
+import { numberToRupiah } from "../utils/numberToRupiah.js";
 
 function BookCard({ data }) {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function BookCard({ data }) {
         </p>
         <div className="flex items-center justify-between">
           <span className="text-sm font-bold text-gray-900 ">
-            Rp.{data.price}
+            {numberToRupiah(data.price)}
           </span>
           <button
             onClick={handleClick}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/user/userSlice.js";
+import { numberToRupiah } from "../utils/numberToRupiah.js";
 
 function BookPage() {
   const [book, setBook] = useState([]);
@@ -86,7 +87,9 @@ function BookPage() {
               <h1 className="text-3xl font-bold">{book.title}</h1>
             </div>
             <p className="text-gray-700">{book.description}</p>
-            <h6 className="text-2xl font-semibold">Rp.{book.price}</h6>
+            <h6 className="text-2xl font-semibold">
+              {numberToRupiah(book.price)}
+            </h6>
             <div className="flex flex-row items-center gap-12">
               <button
                 onClick={handleClick}

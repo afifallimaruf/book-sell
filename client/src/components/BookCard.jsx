@@ -1,37 +1,44 @@
 import React from "react";
 import { Card } from "flowbite-react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/user/userSlice.js";
 import { numberToRupiah } from "../utils/numberToRupiah.js";
 
 function BookCard({ data }) {
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleClick = async () => {
-    try {
-      const request = await fetch(
-        "http://localhost:8080/api/user/add-to-cart",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            bookId: data._id,
-            image: data.image,
-            title: data.title,
-            price: data.price,
-          }),
-        }
-      );
 
-      const dataBook = await request.json();
-      if (!request.ok) {
-        console.log("Error");
-      } else {
-        dispatch(addToCart(dataBook.userCart));
+  const handleClick = async () => {
+    if (!currentUser) {
+      navigate("/login");
+    } else {
+      try {
+        const request = await fetch(
+          "http://localhost:8080/api/user/add-to-cart",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              bookId: data._id,
+              image: data.image,
+              title: data.title,
+              price: data.price,
+            }),
+          }
+        );
+
+        const dataBook = await request.json();
+        if (!request.ok) {
+          console.log("Error");
+        } else {
+          dispatch(addToCart(dataBook.userCart));
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
   return (

@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth.route");
 const bookRoutes = require("./routes/book.route");
+const orderRoutes = require("./routes/order.route");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -41,6 +42,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/book", bookRoutes);
 app.use("/api/user", userRoute);
+app.use("/api/order", orderRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

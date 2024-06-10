@@ -1,14 +1,19 @@
 import { Button } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import BgHero from "../assets/img.jpg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/user/userSlice.js";
 import { numberToRupiah } from "../utils/numberToRupiah.js";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+  const { currentUser } = useSelector((state) => state.user);
   const [books, setBooks] = useState([]);
   const [bookMainImg, setBookMainImg] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const bgImage = {
     backgroundImage: `url(${BgHero})`,
@@ -41,29 +46,33 @@ function Hero() {
   }, []);
 
   const handleClick = async () => {
-    try {
-      const request = await fetch(
-        "http://localhost:8080/api/user/add-to-cart",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            bookId: bookMainImg._id,
-            image: bookMainImg.image,
-            title: bookMainImg.title,
-            price: bookMainImg.price,
-          }),
+    if (!currentUser) {
+      navigate("/login");
+    } else {
+      try {
+        const request = await fetch(
+          "http://localhost:8080/api/user/add-to-cart",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              bookId: bookMainImg._id,
+              image: bookMainImg.image,
+              title: bookMainImg.title,
+              price: bookMainImg.price,
+            }),
+          }
+        );
+        const dataBook = await request.json();
+        if (!request.ok) {
+          console.log("Error");
+        } else {
+          dispatch(addToCart(dataBook.userCart));
         }
-      );
-      const dataBook = await request.json();
-      if (!request.ok) {
-        console.log("Error");
-      } else {
-        dispatch(addToCart(dataBook.userCart));
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -110,7 +119,7 @@ function Hero() {
                 <img
                   data-aos="zoom-in"
                   data-aos-once="true"
-                  src={bookMainImg.image}
+                  src={bookMainImg.image || <Skeleton />}
                   alt=""
                   className="w-[300px] h-[300px] sm:[h-450px] sm:w-[450px] sm:scale-125 object-contain mx-auto"
                 />

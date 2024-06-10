@@ -1,0 +1,1 @@
+export const MIDTRANS_APP_URL = process.env.REACT_APP_MIDTRANS_APP_URL_SNAP_JS;

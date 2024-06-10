@@ -51,6 +51,7 @@ function CartPage() {
   };
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_MIDTRANS_APP_URL_SNAP_JS);
     const getPrices = () => {
       currentUser.userCart.map((product) => prices.push(product.totalAmount));
     };

@@ -3,7 +3,6 @@ const User = require("../models/user.model");
 const midtransClient = require("midtrans-client");
 
 const createOrder = async (req, res, next) => {
-  console.log("SERVER KEY: ", process.env.SERVER_KEY);
   try {
     const newOrder = new Order({
       userId: req.user.id,

@@ -16,9 +16,7 @@ const app = express();
 mongoose.set("strictQuery", false);
 
 mongoose
-  .connect(process.env.MONGO, {
-    dbName: "booksell",
-  })
+  .connect(process.env.MONGO)
   .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
